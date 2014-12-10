@@ -135,7 +135,7 @@ def serve(port=515):
 if __name__ == '__main__':
     import sys
     if len(sys.argv) > 1:
-        pytronix.scrape(sys.argv[1])
+        scrape(sys.argv[1])
     else:
-        pytronix.serve()
+        serve()
 

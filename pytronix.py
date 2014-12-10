@@ -119,17 +119,17 @@ def serve(port=515):
     # listen for a connection
     server.listen(1)
     print '*** PYTRONIX SERVER ***'
-    print 'Waiting for connection...'
     while 1:
-        try:
-            client, addr = server.accept()
-        except KeyboardInterrupt:
-            break
-        except socket.timeout:
-            continue
+        print 'Waiting for request...'
+        # wait for a request
+        while 1:
+            # using select with timeout allows keyboard interrupt
+            socklist = select.select([server],[server],[],0.5)
+            if len(socklist[0]): break
+        # accept a print request from the scope
+        client, addr = server.accept()
         print '  Connection from',addr
         scrape(addr[0],client)
-        print 'Waiting for next request...'
     server.close()
 
 

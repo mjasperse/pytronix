@@ -114,6 +114,7 @@ def serve(port=515):
     # create a socket and bind to port
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.settimeout(1.0)
+    server.setblocking(True)
     server.bind(('', port))
     # listen for a connection
     server.listen(1)

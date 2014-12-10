@@ -1,0 +1,4 @@
+syntax: glob
+*.ps
+*.h5
+*.png

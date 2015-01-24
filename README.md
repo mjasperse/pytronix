@@ -1,4 +1,4 @@
-# Pytronix #
+# Pytronix - One button scope data extraction#
 
 This project provides the ability to quickly downloading scope data from a TekTronix digital oscilloscope using the telnet interface.
 
@@ -8,9 +8,9 @@ All currently visible channels are downloaded, and all waveform settings are sto
 
 Using pytronix provides a convenient "one click" way to save data from a TekTronix DSO for later analysis.
 
-Uses the telepythic library for handling underlying communications.
+Uses the [telepythic library](https://bitbucket.org/martijnj/telepythic) for handling underlying communications.
 
-   
+
 ### How do I use it? ###
 Pytronix provides a number of scripts that do the data acquisition and can be run directly from the command line, as per one of the following examples.
 

@@ -1,8 +1,8 @@
 """
 PYTRONIX
-a basic print server interface to scrape data from Tektronix oscilloscopes
-concept and original version by Russell Anderson
-rewritten with LPD server and binary transfer by Martijn Jasperse
+A basic print server interface to scrape data from TekTronix oscilloscopes
+Concept and original version by Russell Anderson
+Rewritten with LPD server and binary transfer by Martijn Jasperse
 """
 from telepythic.library import TekScope
 import numpy as np

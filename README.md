@@ -1,4 +1,4 @@
-# Pytronix - One button data extraction#
+# Pytronix - One button trace extraction#
 
 This project provides the ability to quickly downloading scope data from a TekTronix digital oscilloscope using the telnet interface.
 

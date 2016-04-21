@@ -120,7 +120,7 @@ def serve(port=515):
     server.listen(1)
     print '*** PYTRONIX SERVER ***'
     while 1:
-        print 'Waiting for request...'
+        print 'Waiting for request on port %i...'%port
         # wait for a request
         while 1:
             # using select with timeout allows keyboard interrupt
@@ -131,12 +131,3 @@ def serve(port=515):
         print '  Connection from',addr
         scrape(addr[0],client)
     server.close()
-
-
-if __name__ == '__main__':
-    import sys
-    if len(sys.argv) > 1:
-        scrape(sys.argv[1])
-    else:
-        serve()
-

@@ -1,7 +1,7 @@
 from setuptools import setup
 setup(
     name = "pytronix",
-    version = "0.8",
+    version = "0.82",
     packages = [ 'pytronix' ],
     package_dir = { 'pytronix':'' },
     package_data = { '': ['*.txt','*.md'] },

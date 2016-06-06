@@ -1,11 +1,7 @@
 import sys, time, socket
 from telepythic.library import TekScope
 
-if __name__ == "__main__":
-    ip = sys.argv[1]
-    print 'Connecting to',repr(ip)
-    dev = TekScope(sys.argv[1])
-    
+def configure_scope(dev):
     # whoami? (existential like, woah)
     myip = dev.dev.sock.getsockname()[0]
     myname = socket.gethostname()
@@ -38,4 +34,12 @@ if __name__ == "__main__":
     # set date and time while we're connected
     dev.write('DATE "%s"'%time.strftime('%Y-%m-%d'))
     dev.write('TIME "%s"'%time.strftime('%H:%M:%S'))
+
+
+if __name__ == "__main__":
+    # invoked as a script
+    ip = sys.argv[1]
+    print 'Connecting to',ip
+    dev = TekScope(ip)
+    configure_scope(dev)
     

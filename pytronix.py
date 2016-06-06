@@ -15,22 +15,22 @@ def save_h5(dev,filename):
     # create the h5 file
     with h5py.File(filename,'w') as f:
         g = f.create_group('traces')
-        # g.attrs['ip'] = dev.host
         g.attrs['id'] = dev.ask('*IDN?')
         print 'Querying channels'
-        # check each channel
-        for i in '1234':
-            # is this channel displayed?
-            if int(dev.ask('SELect:CH'+i+'?')):
-                print '  Downloading channel',i
-                wfmo, T, Y = dev.waveform(i)
+        channels = dev.channels()
+        print '  Found', sum(channels.values()), 'active channels'
+        for ch, en in channels.items():
+            if en is True:
+                print '  Downloading',ch
+                wfmo, T, Y = dev.waveform(ch)
                 # put in the file
-                d = g.create_dataset('CH'+i, data = np.transpose([T,Y]))
+                d = g.create_dataset(ch, data = np.transpose([T,Y]))
                 for k in wfmo:
                     d.attrs[k] = wfmo[k]
 
 def save_screenshot(ipaddr,filename):
-    import urllib2, Image
+    import urllib2
+    from PIL import Image
     # get image of front-panel from the web server
     imgdata = urllib2.urlopen('http://' + ipaddr + '/image.png').read()
     # write to disk
@@ -92,10 +92,15 @@ def scrape(host, client=None):
     running = dev.ask('ACQ:STATE?')
     dev.write('ACQ:STATE STOP')
     try:
-        t1 = time.time()
-        save_screenshot(host,dest+'.png')
-        print 'Took screenshot (in %.2fs)'%(time.time()-t1)
-        
+        # if it's a string, assume it's an IP address so get an image from the webserver
+        if isinstance(host, str):
+            port = dev.ask('ETHERnet:HTTPPORT?')
+            t1 = time.time()
+            save_screenshot(host+':'+port,dest+'.png')
+            print 'Took screenshot (in %.2fs)'%(time.time()-t1)
+        else:
+            print 'Skipping screenshot'
+        # scrape data from the device
         t1 = time.time()
         save_h5(dev,dest+'.h5')
         print 'Downloaded data (in %.2fs)'%(time.time()-t1)

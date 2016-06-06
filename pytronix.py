@@ -136,3 +136,12 @@ def serve(port=515):
         print '  Connection from',addr
         scrape(addr[0],client)
     server.close()
+
+
+if __name__ == '__main__':
+    # simplest possible commandline execution
+    import sys
+    if len(sys.argv) > 1:
+        scrape(sys.argv[1])
+    else:
+        serve()

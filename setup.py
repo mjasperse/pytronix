@@ -1,10 +1,10 @@
 from setuptools import setup
 setup(
     name = "pytronix",
-    version = "0.82",
+    version = "0.83",
     packages = [ 'pytronix' ],
     package_dir = { 'pytronix':'' },
-    package_data = { '': ['*.txt','*.md'] },
+    package_data = { '': ['LICENSE.txt','README.md'] },
     install_requires = [ 'telepythic' ],
     
     # metadata for upload to PyPI

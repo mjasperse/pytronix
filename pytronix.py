@@ -72,9 +72,10 @@ def receive_ps(sock,filename):
     return ctrl
     
     
-def scrape(host, client=None):
-    # label files by timestamp
-    dest = time.strftime('%Y%m%dT%H%M%S')
+def scrape(host, client=None, dest=None):
+    if dest is None:
+        # label files by timestamp
+        dest = time.strftime('%Y%m%dT%H%M%S')
     t0 = time.time()
     
     # receive the print request
@@ -94,7 +95,7 @@ def scrape(host, client=None):
     try:
         # if it's a string, assume it's an IP address so get an image from the webserver
         if isinstance(host, str):
-            port = dev.ask('ETHERnet:HTTPPORT?')
+            port = dev.query('ETHERnet:HTTPPORT?')
             t1 = time.time()
             save_screenshot(host+':'+port,dest+'.png')
             print 'Took screenshot (in %.2fs)'%(time.time()-t1)

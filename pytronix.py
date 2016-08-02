@@ -10,8 +10,6 @@ import time
 
 def save_h5(dev,filename):
     import h5py
-    # display a happy message
-    dev.write('MESSage:STATE ON; SHOW "Downloading..."')
     # create the h5 file
     with h5py.File(filename,'w') as f:
         g = f.create_group('traces')
@@ -72,7 +70,7 @@ def receive_ps(sock,filename):
     return ctrl
     
     
-def scrape(host, client=None, dest=None):
+def scrape(host, client=None, dest=None, lock=True):
     if dest is None:
         # label files by timestamp
         dest = time.strftime('%Y%m%dT%H%M%S')
@@ -87,11 +85,14 @@ def scrape(host, client=None, dest=None):
     print 'Attempting to scrape',host
     # now we know its ip, reconnect and scrape data
     dev = TekScope(host)
-    # lock front panel
-    dev.lock(True)
-    # stop acquisition so data doesn't change while we download
-    running = dev.ask('ACQ:STATE?')
-    dev.write('ACQ:STATE STOP')
+    if lock:
+        # stop acquisition so data doesn't change while we download
+        running = dev.ask('ACQ:STATE?')
+        dev.write('ACQ:STATE STOP')
+        # lock front panel
+        dev.lock(True)
+        # display a happy message
+        dev.write('MESSage:STATE ON; SHOW "Downloading..."')
     try:
         # if it's a string, assume it's an IP address so get an image from the webserver
         if isinstance(host, str):
@@ -107,10 +108,16 @@ def scrape(host, client=None, dest=None):
         print 'Downloaded data (in %.2fs)'%(time.time()-t1)
     except Exception as e:
         print 'ERROR >>', e
-    # reset device
-    dev.write('MESSage:CLEAR; STATE OFF')
-    dev.write('ACQ:STATE '+running)
-    dev.lock(False)
+    if lock:
+        # unlock front panel
+        dev.lock(False)
+	    # clear messages
+        time.sleep(0.1)
+        dev.write('MESSage:STATE OFF')
+        dev.write('MESSage:CLEAR')
+	    # resume operation
+        time.sleep(0.1)
+        dev.write('ACQ:STATE %s'%running)
     dev.close()
     print '  Success (%.2fs elapsed)'%(time.time()-t0)
 

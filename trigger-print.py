@@ -1,7 +1,7 @@
 """
-TELEPYTHIC -- a python interface to test equipment
-Copyright 2014 by Martijn Jasperse
-https://bitbucket.org/martijnj/telepythic
+PYTRONIX
+Copyright 2014-2020 by Martijn Jasperse
+https://github.com/mjasperse/pytronix
 
 Simple test script that forces scope to print to server.
 Useful for debugging the print server code without having to physically press the button every time.

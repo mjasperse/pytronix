@@ -14,7 +14,7 @@ setup(
     long_description = "This project provides the ability to quickly downloading scope data from a TekTronix digital oscilloscope using the telnet interface.",
     license = "BSD",
     keywords = "TekTronix TDS DPO MSO CRO scope HDF5",
-    url = "https://bitbucket.org/martijnj/pytronix",
+    url = "https://github.com/mjasperse/pytronix",
 
     # could also include long_description, download_url, classifiers, etc.
 )

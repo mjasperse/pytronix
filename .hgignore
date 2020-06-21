@@ -1,9 +1,0 @@
-syntax: glob
-*.ps
-*.h5
-*.png
-*.zip
-*.egg-info
-*.pyc
-build
-dist

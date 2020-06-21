@@ -1,5 +1,8 @@
 """
-PYTRONIX
+PYTRONIX SERVER
+Copyright 2014-2020 by Martijn Jasperse
+https://github.com/mjasperse/pytronix
+
 A basic print server interface to scrape data from TekTronix oscilloscopes
 Concept and original version by Russell Anderson
 Rewritten with LPD server and binary transfer by Martijn Jasperse

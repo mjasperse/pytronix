@@ -1,0 +1,8 @@
+*.ps
+*.h5
+*.png
+*.zip
+*.pyc
+*.egg-info/
+build/
+dist/

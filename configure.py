@@ -1,3 +1,11 @@
+"""
+PYTRONIX
+Copyright 2014-2020 by Martijn Jasperse
+https://github.com/mjasperse/pytronix
+
+Configure a TekTronix scope to set the active printer to THIS computer,
+so that pressing the "print" button will start a scrape download
+"""
 import sys, time, socket
 from telepythic.library import TekScope
 

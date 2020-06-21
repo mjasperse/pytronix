@@ -1,4 +1,4 @@
-# Pytronix - One button trace extraction#
+# Pytronix - One button trace extraction
 
 This project provides the ability to quickly downloading scope data from a TekTronix digital oscilloscope using the telnet interface.
 
@@ -11,7 +11,7 @@ All currently visible channels are downloaded, and all waveform settings are sto
 Uses the [telepythic library](https://bitbucket.org/martijnj/telepythic) for handling underlying communications.
 
 
-### How do I use it? ###
+### How do I use it?
 Pytronix is most easily executed from the command line as a python module.
 Install from the cheeseshop with `pip install pytronix` and then invoke with
 ```

@@ -1,16 +1,16 @@
 """
-TELEPYTHIC -- a python interface to test equipment
-Copyright 2014 by Martijn Jasperse
-https://bitbucket.org/martijnj/telepythic
+PYTRONIX
+Copyright 2014-2020 by Martijn Jasperse
+https://github.com/mjasperse/pytronix
 
 Module file to provide convenience interface. Call with
 $ python -m pytronix [options]
 where valid options are described by -h.
 """
-import pytronix
 import telepythic
 import argparse
-from configure import configure_scope
+from .pytronix import serve, scrape
+from .configure import configure_scope
 
 parser = argparse.ArgumentParser(
 	description='''scrape data from TekTronix digital oscilloscopes either using a network connection, or through VISA.
@@ -38,10 +38,10 @@ elif args.ip is not None:
 
 if instr is None:
 	# no argument means start the "print" server
-	pytronix.serve()
+	serve()
 elif args.configure:
     # should we try to configure the instrument?
     configure_scope(instr)
 else:
     # not doing configure, so perform a data scrape
-    pytronix.scrape(instr)
+    scrape(instr)
